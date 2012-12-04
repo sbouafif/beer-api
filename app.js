@@ -22,7 +22,11 @@ var Beer = new Schema({
   , origin: String
   , type: String
   , degree: Number
+  , price: ObjectId
+  , rate: ObjectId
 });
+
+var beerModel = db.model('beers', Beer);
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -42,6 +46,8 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/beers', beer.list);
+app.get('/beers/create', beer.createForm);
+app.post('/beers/create', beer.create);
 app.get('/beers/price/:sort', beer.list);
 app.get('/beers/rate/:sort', beer.list);
 app.get('/beers/:beer', beer.show);

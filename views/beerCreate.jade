@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Ajouter une biere
+  form(id='beer-create', method='post', action='/beers/create', enctype='multipart/form-data')
+    label(for='name') Nom :
+    input(name='name', id='name', type='text')
+    br
+    label(for='origin') Origine :
+    input(name='origin', id='origin', type='text', placeholder='Belgique')
+    br
+    label(for='type') Type :
+    input(name='type', id='type', type='text', placeholder='Brune')
+    br
+    label(for='dregree') Degres :
+    input(name='degree', id='degree', type='text')
+    br
+    input(type='submit', value='Ajouter')
