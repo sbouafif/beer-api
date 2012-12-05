@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  p
+    a(href='beers/create', title='Ajouter une biere') Ajouter une biere
+
+  table
+    tr
+      td Nom
+      td Origine
+      td Type
+      td Degree
+      td Description
+      td Actions
+    each beer in beers
+      tr
+        td= beer.name
+        td= beer.origin
+        td= beer.type
+        td= beer.degree
+        td= beer.desc
+        td 
+          a(href='/beers/#{beer._id}/update', title='Update') Update
+          | / 
+          a(href='/beers/#{beer._id}/show', title='Voir') Voir
+          | / 
+          a(href='/beers/#{beer._id}/delete', title='Supprimer') Supprimer
+  

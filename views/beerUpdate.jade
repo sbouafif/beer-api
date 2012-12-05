@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 #{title}
+  form(id='beer-create', method='post', action='/beers/update', enctype='multipart/form-data')
+    input(name='id', id='id', type='hidden', value='#{objId}')
+    label(for='name') Nom :
+    input(name='name', id='name', type='text')
+    br
+    label(for='origin') Origine :
+    input(name='origin', id='origin', type='text', placeholder='Belgique')
+    br
+    label(for='type') Type :
+    input(name='type', id='type', type='text', placeholder='Brune')
+    br
+    label(for='dregree') Degres :
+    input(name='degree', id='degree', type='text')
+    br
+    label(for='desc') Description :
+    textarea(name='desc', id='desc', rows='8', cols='40')
+    br
+    input(type='submit', value='Ajouter')
