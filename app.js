@@ -8,25 +8,9 @@ var express = require('express')
   , beer = require('./routes/beer')
   , bar = require('./routes/bar')
   , http = require('http')
-  , path = require('path')
-  , mongoose = require('mongoose');
+, path = require('path');
 
 var app = express();
-
-var db = mongoose.createConnection('localhost', 'beer-api')
-  , Schema = mongoose.Schema
-  , ObjectId = Schema.ObjectId;
-
-var Beer = new Schema({
-    name: String
-  , origin: String
-  , type: String
-  , degree: Number
-  , price: ObjectId
-  , rate: ObjectId
-});
-
-var beerModel = db.model('beers', Beer);
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -45,9 +29,13 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/beers', beer.list);
+app.get('/beers/list.json', beer.JSONList);
+app.get('/beers/list', beer.list);
 app.get('/beers/create', beer.createForm);
 app.post('/beers/create', beer.create);
+app.get('/beers/:id/update', beer.updateForm);
+app.post('/beers/update', beer.update)
+app.get('/beers/:id/delete', beer.delete);
 app.get('/beers/price/:sort', beer.list);
 app.get('/beers/rate/:sort', beer.list);
 app.get('/beers/:beer', beer.show);
