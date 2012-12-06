@@ -1,6 +1,18 @@
 var db = require('../models/db')
   , barModel = db.getBarModel();
 
+exports.JSONShow = function(req, res){
+    db.getBarModel().find({_id: req.params.id}, function(err, bar) {
+        console.log(bar);
+
+        res.contentType('json');
+        res.json({
+            success: true,
+            data: bar
+        });
+    });
+};
+
 exports.JSONList = function(req, res){
     db.getBarModel().find({}, function (err, bars) {
         res.contentType('json');

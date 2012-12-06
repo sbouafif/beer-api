@@ -40,6 +40,7 @@ app.get('/beers/price/:sort', beer.list);
 app.get('/beers/rate/:sort', beer.list);
 app.get('/beers/:beer', beer.show);
 
+app.get('/bars/:id/show.json', bar.JSONShow);
 app.get('/bars/list.json', bar.JSONList);
 app.get('/bars/list', bar.list);
 app.get('/bars/create', bar.createForm);
