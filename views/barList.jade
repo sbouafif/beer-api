@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  p
+    a(href='/bars/create', title='Ajouter un bar') Ajouter un bar
+
+  table
+    tr
+      td Nom
+      td Adresse
+      td Debut Happy Hour
+      td Fin Happy Hour
+      td Latitude
+      td Longitude
+      td Description
+      td Photo
+      td Actions
+    each bar in bars
+      tr
+        td= bar.name
+        td= bar.address
+        td= bar.happy_start
+        td= bar.happy_end
+        td= bar.latitude
+        td= bar.longitude
+        td= bar.desc
+        td= bar.photo
+        td 
+          a(href='/bars/#{bar._id}/update', title='Update') Update
+          | / 
+          a(href='/bars/#{bar._id}/show', title='Voir') Voir
+          | / 
+          a(href='/bars/#{bar._id}/delete', title='Supprimer') Supprimer
+  
