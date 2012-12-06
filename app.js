@@ -40,6 +40,13 @@ app.get('/beers/price/:sort', beer.list);
 app.get('/beers/rate/:sort', beer.list);
 app.get('/beers/:beer', beer.show);
 
+app.get('/bars/list.json', bar.JSONList);
+app.get('/bars/list', bar.list);
+app.get('/bars/create', bar.createForm);
+app.post('/bars/create', bar.create);
+app.get('/bars/:id/update', bar.updateForm);
+app.post('/bars/update', bar.update)
+app.get('/bars/:id/delete', bar.delete);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
