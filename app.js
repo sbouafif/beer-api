@@ -7,6 +7,9 @@ var express = require('express')
   , routes = require('./routes')
   , beer = require('./routes/beer')
   , bar = require('./routes/bar')
+  , rateBar = require('./routes/rateBar')
+  , rateBeer = require('./routes/rateBeer')
+  , price = require('./routes/price')
   , http = require('http')
 , path = require('path');
 
@@ -48,6 +51,19 @@ app.post('/bars/create', bar.create);
 app.get('/bars/:id/update', bar.updateForm);
 app.post('/bars/update', bar.update)
 app.get('/bars/:id/delete', bar.delete);
+
+app.get('/bars/:id/avgrate.json', rateBar.JSONgetBarAvgRate);
+app.post('/bars/rate', rateBar.addRate);
+app.get('/bars/:id/rate', rateBar.addRateForm);
+
+app.get('/beers/:id/avgrate.json', rateBeer.JSONgetBeerAvgRate);
+app.post('/beers/rate', rateBeer.addRate);
+app.get('/beers/:id/rate', rateBeer.addRateForm);
+
+app.get('/bars/:id/beers.json', price.JSONgetBeersPerBar);
+app.get('/bars/:idBar/beers/:idBeer/price.json', price.JSONgetBeerPricePerBar);
+app.post('/beers/price', price.addBeerPriceForBar);
+app.get('/bars/:idBar/beers/:idBeer/price', price.addBeerPriceForBarForm);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

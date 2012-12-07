@@ -1,5 +1,46 @@
 var mongoose = require('mongoose');
 
+exports.getBeerPriceForBarModel = function(){
+  var db = mongoose.createConnection('localhost', 'beerAPI')
+    , Schema = mongoose.Schema
+    , ObjectId = Schema.ObjectId;
+
+    var Price = new Schema({
+        price: Number,
+        beer: ObjectId,
+        bar: ObjectId
+    });
+
+    return db.model('prices', Price);
+};
+
+exports.getBarRatesModel = function() {
+  var db = mongoose.createConnection('localhost', 'beerAPI')
+    , Schema = mongoose.Schema
+    , ObjectId = Schema.ObjectId;
+
+    var Rate = new Schema({
+        rate: Number,
+        bar: ObjectId
+    });
+
+    return db.model('rateBars', Rate);
+}
+
+exports.getBeerRatesModel = function() {
+  var db = mongoose.createConnection('localhost', 'beerAPI')
+    , Schema = mongoose.Schema
+    , ObjectId = Schema.ObjectId;
+
+
+    var Rate = new Schema({
+        rate: Number,
+        beer: ObjectId
+    });
+
+    return db.model('rateBeers', Rate);
+};
+
 exports.getBeerModel = function(){
   var db = mongoose.createConnection('localhost', 'beerAPI')
     , Schema = mongoose.Schema
@@ -12,8 +53,6 @@ exports.getBeerModel = function(){
   , type: String
   , degree: Number
   , desc: String
-  , price: ObjectId
-  , rate: ObjectId
   });
   
     return db.model('beers', Beer);
@@ -35,9 +74,6 @@ exports.getBarModel = function(){
   , longitude: Number
   , desc: String
   , photo: String
-  , beers: ObjectId
-  , rate: ObjectId
-  , prices: ObjectId
   });
   
     return db.model('bars', Bar);
